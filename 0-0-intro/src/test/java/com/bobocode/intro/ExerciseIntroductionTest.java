@@ -39,6 +39,7 @@ class ExerciseIntroductionTest {
     @DisplayName("encodeMessage returns correct encoded message")
     @SneakyThrows
     void encodeMessageReturnsCorrectPhrase() {
+
         var encodeMessageMethod = Arrays.stream(ExerciseIntroduction.class.getDeclaredMethods())
                 .filter(method -> method.getName().equals("encodeMessage"))
                 .findAny()
