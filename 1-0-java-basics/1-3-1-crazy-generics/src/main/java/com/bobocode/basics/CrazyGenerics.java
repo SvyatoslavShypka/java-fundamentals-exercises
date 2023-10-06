@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * {@link CrazyGenerics} is an exercise class. It consists of classes, interfaces and methods that should be updated
@@ -152,7 +153,8 @@ public class CrazyGenerics {
          *
          * @param list
          */
-        public static void print(List<Integer> list) {
+//        public static void print(List<Integer> list) {
+        public static void print(List<?> list) {
             // todo: refactor it so the list of any type can be printed, not only integers
             list.forEach(element -> System.out.println(" – " + element));
         }
@@ -165,8 +167,9 @@ public class CrazyGenerics {
          * @param entities provided collection of entities
          * @return true if at least one of the elements has null id
          */
-        public static boolean hasNewEntities(Collection<BaseEntity> entities) {
-            throw new ExerciseNotCompletedException(); // todo: refactor parameter and implement method
+        public static boolean hasNewEntities(Collection<? extends BaseEntity> entities) {
+//            throw new ExerciseNotCompletedException(); // todo: refactor parameter and implement method
+            return entities.stream().anyMatch(x -> x.getUuid() == null);
         }
 
         /**
@@ -178,8 +181,10 @@ public class CrazyGenerics {
          * @param validationPredicate criteria for validation
          * @return true if all entities fit validation criteria
          */
-        public static boolean isValidCollection() {
-            throw new ExerciseNotCompletedException(); // todo: add method parameters and implement the logic
+        public static boolean isValidCollection(Collection<? extends BaseEntity> entities,
+                                                Predicate<? super BaseEntity> validationPredicate) {
+//            throw new ExerciseNotCompletedException(); // todo: add method parameters and implement the logic
+            return entities.stream().allMatch(validationPredicate);
         }
 
         /**
