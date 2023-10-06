@@ -5,10 +5,12 @@ import com.bobocode.util.ExerciseNotCompletedException;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -213,6 +215,20 @@ public class CrazyGenerics {
          * @return optional max value
          */
         // todo: create a method and implement its logic manually without using util method from JDK
+        public static <T> Optional<T> findMax(Iterable<T> elements, Comparator<? super T> comparator) {
+            var iterator = elements.iterator();
+            if (!iterator.hasNext()) {
+                return Optional.empty();
+            }
+            var max = iterator.next();
+            while (iterator.hasNext()) {
+                var temp = iterator.next();
+                if (comparator.compare(temp, max) > 0) {
+                    max = temp;
+                }
+            }
+            return Optional.of(max);
+        };
 
         /**
          * findMostRecentlyCreatedEntity is a generic util method that accepts a collection of entities and returns the
@@ -227,6 +243,9 @@ public class CrazyGenerics {
          * @return an entity from the given collection that has the max createdOn value
          */
         // todo: create a method according to JavaDoc and implement it using previous method
+        public static <T extends BaseEntity> T findMostRecentlyCreatedEntity(Collection<T> entities) {
+            return findMax(entities, CREATED_ON_COMPARATOR).orElseThrow();
+        }
 
         /**
          * An util method that allows to swap two elements of any list. It changes the list so the element with the index
@@ -240,7 +259,14 @@ public class CrazyGenerics {
         public static void swap(List<?> elements, int i, int j) {
             Objects.checkIndex(i, elements.size());
             Objects.checkIndex(j, elements.size());
-            throw new ExerciseNotCompletedException(); // todo: complete method implementation 
+//            throw new ExerciseNotCompletedException(); // todo: complete method implementation
+            swapHelper(elements, i, j);
+        }
+
+        public static <T> void swapHelper(List<T> elements, int i, int j) {
+            T tmp = elements.get(i);
+            elements.set(i, elements.get(j));
+            elements.set(j, tmp);
         }
 
     }
