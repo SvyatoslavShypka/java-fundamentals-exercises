@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 /**
@@ -197,8 +198,9 @@ public class CrazyGenerics {
          * @param <T>          entity type
          * @return true if entities list contains target entity more than once
          */
-        public static boolean hasDuplicates() {
-            throw new ExerciseNotCompletedException(); // todo: update method signature and implement it
+        public static <T extends BaseEntity> boolean hasDuplicates (Collection<T> entities, T targetEntity) {
+//            throw new ExerciseNotCompletedException(); // todo: update method signature and implement it
+            return entities.stream().filter(x -> x.getUuid().equals(targetEntity.getUuid())).count() > 1;
         }
 
         /**
