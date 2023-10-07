@@ -13,6 +13,7 @@ import java.util.Map;
  * <p>
  *
  * @author Taras Boychuk
+ *
  */
 public class HeterogeneousMaxHolder {
 
