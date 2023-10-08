@@ -15,6 +15,7 @@ import java.util.Map;
  * @author Taras Boychuk
  *
  */
+
 public class HeterogeneousMaxHolder {
 
     /**
