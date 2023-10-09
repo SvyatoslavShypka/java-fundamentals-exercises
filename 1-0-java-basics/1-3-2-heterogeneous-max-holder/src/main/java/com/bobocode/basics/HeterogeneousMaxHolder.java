@@ -1,7 +1,6 @@
 package com.bobocode.basics;
 
 import java.util.Map;
-
 /**
  * {@link HeterogeneousMaxHolder} is a multi-type container that holds maximum values per each type. It's kind of a
  * key/value map, where the key is a type and the value is the maximum among all values of this type that were put.
