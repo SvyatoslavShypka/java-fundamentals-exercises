@@ -17,6 +17,7 @@ import java.util.Map;
  */
 
 public class HeterogeneousMaxHolder {
+
     /**
      * A method put stores a provided value by its type, if the value is greater than the current maximum. In other words, the logic
      * of this method makes sure that only max value is stored and everything else is ignored.
